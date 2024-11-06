@@ -37,7 +37,8 @@ public class WindowsCountLimiter {
             return true;
         }
 
-        if ((requestTimestamp + timeGap) < timestamp) {
+        // 去除过期窗口的数据
+        while ((requestTimestamp + timeGap) < timestamp) {
             slideWindow.poll();
         }
         if (slideWindow.size() < limitQps) {
