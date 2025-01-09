@@ -37,7 +37,7 @@ public class BizProducer {
         kafkaProducer = initKafkaService();
 
         // 1348053
-        for (int i = 0; i < 50000000; i++) {
+        for (int i = 1348055; i < 50000000; i++) {
             PushRequest pushRequest = new PushRequest();
             pushRequest.setAppId(String.valueOf(i));
             pushRequest.setActionCode("aaaa");
@@ -64,9 +64,9 @@ public class BizProducer {
         props.put(org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, servers);
         props.put(org.apache.kafka.clients.producer.ProducerConfig.ACKS_CONFIG, acks);
         props.put(org.apache.kafka.clients.producer.ProducerConfig.RETRIES_CONFIG, retries);
-//        props.put(org.apache.kafka.clients.producer.ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
-//        props.put(org.apache.kafka.clients.producer.ProducerConfig.LINGER_MS_CONFIG, lingerMs);
-//        props.put(org.apache.kafka.clients.producer.ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
+        props.put(org.apache.kafka.clients.producer.ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
+        props.put(org.apache.kafka.clients.producer.ProducerConfig.LINGER_MS_CONFIG, lingerMs);
+        props.put(org.apache.kafka.clients.producer.ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
         props.put(org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(org.apache.kafka.clients.producer.ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         return new KafkaProducer(props);

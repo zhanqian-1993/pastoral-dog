@@ -10,6 +10,7 @@ org.example.consumer.biz.BizLogic1 \
 org.example.consumer.biz.BizLogic2 \
 org.example.consumer.biz.BizLogic3 \
 对比上面类，循环10000次查看行代实际运码时长，择出性能最优 \
+**优化思路**：减少 JSON 解析，前置到 producer 处理，然后 consumer 只通过简单的截取前几位字符判断发送逻辑 \
 **可以得出一个绝对结论**
 
 ### step3:优化 kafka 拉取配置

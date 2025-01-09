@@ -16,6 +16,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <fastjson.version>1.2.46</fastjson.version>
+        <openservices.log.version>0.6.111</openservices.log.version>
+        <openservices.log.producer.version>0.1.15</openservices.log.producer.version>
     </properties>
 
     <dependencies>
@@ -36,6 +38,18 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>aliyun-log</artifactId>
+            <version>${openservices.log.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>lz4</artifactId>
+                    <groupId>net.jpountz.lz4</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

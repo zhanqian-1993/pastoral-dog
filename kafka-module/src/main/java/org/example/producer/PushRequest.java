@@ -3,6 +3,8 @@ package org.example.producer;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.UUID;
+
 /**
  * Created by pengfei on 2018/11/27.
  */
@@ -138,4 +140,23 @@ public class PushRequest {
      * 第三方信息
      */
     private String thirdPartyInfo;
+
+    public static PushRequest getSample() {
+        PushRequest pushRequest = new PushRequest();
+        pushRequest.setAppId("appid");
+        pushRequest.setActionCode("aaaa");
+        pushRequest.setBdata("{\"adType\":\"cpuv\"}");
+        pushRequest.setB("b");
+        pushRequest.setUtmCnt_a("a");
+        pushRequest.setUtmCnt_b("b");
+        pushRequest.setUtmCnt_c("c");
+        pushRequest.setUtmCnt_d("d");
+        pushRequest.setUtmCnt_e(UUID.randomUUID().toString());
+        pushRequest.setOs("oss");
+        pushRequest.setClientTime(System.currentTimeMillis());
+        pushRequest.setCreateTime(System.currentTimeMillis());
+        pushRequest.setUid("uid");
+        pushRequest.setUrl("http://www.google.com");
+        return pushRequest;
+    }
 }

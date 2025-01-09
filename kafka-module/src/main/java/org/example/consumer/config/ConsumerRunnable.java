@@ -1,10 +1,9 @@
-package org.example.consumer;
+package org.example.consumer.config;
 
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -22,7 +21,7 @@ public class ConsumerRunnable implements Runnable {
         this.groupId = groupId;
         this.kafkaTopic = kafkaTopic;
 
-        System.out.println(Thread.currentThread().getId() + " create ConsumerRunnable");
+        System.out.println(groupId + " create ConsumerRunnable");
     }
 
     @Override
@@ -34,7 +33,6 @@ public class ConsumerRunnable implements Runnable {
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                     records.forEach(record -> {
-                        System.out.println(record.value());
                         bizCommonService.handleMessage(record.value());
                     });
                 }
