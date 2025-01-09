@@ -13,6 +13,7 @@
         <module>thread-module</module>
         <module>redis-module</module>
         <module>spark-module</module>
+        <module>kafka-module</module>
     </modules>
 
     <properties>
