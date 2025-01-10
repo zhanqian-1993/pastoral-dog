@@ -28,12 +28,15 @@ public class ConsumerRunnable implements Runnable {
     public void run() {
         while (true) {
             try {
+                System.out.println("outer method");
                 KafkaConsumer<String, String> consumer = createConsumer();
                 consumer.subscribe(Collections.singletonList(kafkaTopic));
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                     records.forEach(record -> {
+                        System.out.println("消费");
                         bizCommonService.handleMessage(record.value());
+                        throw new IllegalArgumentException("意外退出");
                     });
                 }
             } catch (Exception e) {

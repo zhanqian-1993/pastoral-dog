@@ -32,28 +32,25 @@ public class PullConfig1 implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                KafkaConsumer<String, String> consumer = createConsumer();
-                consumer.subscribe(Collections.singletonList(kafkaTopic));
-                while (true) {
-                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-                    records.forEach(record -> {
-                        System.out.println(record.value());
-                        bizCommonService.handleMessage(record.value());
-                        offset += 1;
-                    });
+        try {
+            KafkaConsumer<String, String> consumer = createConsumer();
+            consumer.subscribe(Collections.singletonList(kafkaTopic));
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                records.forEach(record -> {
+                    bizCommonService.handleMessage(record.value());
+                    offset += 1;
+                });
 
-                    long gap = System.currentTimeMillis() - date.getTime();
-                    System.out.println("group_id: " + groupId + " offset: " + offset + ", cost_time: " + gap);
-                    if (gap > 600000) {
-                        break;
-                    }
+                long gap = System.currentTimeMillis() - date.getTime();
+                System.out.println("group_id: " + groupId + " offset: " + offset + ", cost_time: " + gap);
+                if (gap > 600000) {
+                    break;
                 }
-            } catch (Exception e) {
-                System.err.println("Consumer crashed, restarting...");
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            System.err.println("Consumer crashed, restarting...");
+            e.printStackTrace();
         }
     }
 

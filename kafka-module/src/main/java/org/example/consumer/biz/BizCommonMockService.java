@@ -8,7 +8,7 @@ public class BizCommonMockService {
 
     public void handleMessage(String jsonStr) {
         try {
-            Thread.sleep(40);
+            Thread.sleep(20);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
